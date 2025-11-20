@@ -124,6 +124,43 @@ const TeamFinancial = () => {
     return new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
   };
 
+  // Mapeia o status para classes de cor do Badge
+  const getStatusColor = (status: 'Pago' | 'Pendente' | 'Atrasado') => {
+    switch (status) {
+      case 'Pago':
+        return 'bg-green-500/15 text-green-700 border border-green-500/20';
+      case 'Pendente':
+        return 'bg-yellow-500/15 text-yellow-700 border border-yellow-500/20';
+      case 'Atrasado':
+        return 'bg-red-500/15 text-red-700 border border-red-500/20';
+      default:
+        return 'bg-muted text-foreground/80';
+    }
+  };
+
+  // Ações de edição/remoção
+  const handleEdit = (pagamento: any) => {
+    setSelectedPayment(pagamento);
+    setInitialFormData({
+      empresa_id: pagamento.empresa_id || '',
+      valor: String(pagamento.valor ?? ''),
+      data_vencimento: pagamento.data_vencimento ? String(pagamento.data_vencimento).split('T')[0] : '',
+      status: pagamento.status ?? '',
+      forma_pagamento: pagamento.forma_pagamento ?? '',
+      notas: pagamento.notas ?? '',
+      comprovante_file: null,
+    });
+    setIsEditModalOpen(true);
+  };
+
+  const handleDelete = (pagamento: any) => {
+    if (!pagamento?.id) return;
+    // Pode-se integrar com um diálogo existente depois; por enquanto, confirmação simples
+    const ok = window.confirm('Tem certeza que deseja excluir este pagamento?');
+    if (!ok) return;
+    deletePagamento.mutate(pagamento.id);
+  };
+
   const renderSummaryCards = (summary: { totalPago: number; totalPendente: number; totalAtrasado: number; faturamentoPrevisto: number }) => (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
       <Card><CardHeader className="pb-2"><CardTitle className="text-sm font-medium text-muted-foreground">Total Pago</CardTitle></CardHeader><CardContent><div className="text-2xl font-bold text-green-600">{formatCurrency(summary.totalPago)}</div></CardContent></Card>
@@ -148,7 +185,7 @@ const TeamFinancial = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <DashboardSidebar userType="admin" />
+      <DashboardSidebar userType="team" />
       <div className="lg:pl-64">
         <div className="p-6 lg:p-8">
           <div className="mb-8">
