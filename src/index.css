@@ -1,0 +1,237 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* DMM Design System - Professional SaaS Platform */
+
+@layer base {
+  :root {
+    /* DMM Brand Colors - Updated to use #00b336 */
+    --dmm-primary: 138 100% 35%;  /* #00b336 - DMM Green */
+    --dmm-primary-hover: 138 100% 30%;
+    --dmm-primary-light: 138 60% 95%;
+    --dmm-secondary: 220 30% 18%;  /* Professional Dark */
+    --dmm-accent: 217 91% 60%;  /* Professional Blue */
+
+    /* Semantic Colors */
+    --background: 0 0% 100%;
+    --foreground: 224 71% 4%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    
+    --primary: 138 100% 35%;  /* #00b336 - DMM Green */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 9% 46%;
+    
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 9% 46%;
+    
+    --accent: 138 100% 35%;  /* Changed to use DMM Green */
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 138 100% 35%;  /* #00b336 - DMM Green */
+    
+    --radius: 0.75rem;
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 71% 4%;
+    --sidebar-primary: 138 100% 35%;  /* #00b336 - DMM Green */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 14% 96%;
+    --sidebar-accent-foreground: 220 9% 46%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 138 100% 35%;  /* #00b336 - DMM Green */
+
+    /* Animation specific */
+    --skeleton: hsl(138, 100%, 35%);  /* Changed to DMM Green */
+    --btn-border: hsl(138, 100%, 40%);  /* Changed to DMM Green variant */
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+    
+    --card: 224 71% 4%;
+    --card-foreground: 213 31% 91%;
+    
+    --popover: 224 71% 4%;
+    --popover-foreground: 213 31% 91%;
+    
+    --primary: 138 100% 40%;  /* Lighter green for dark mode */
+    --primary-foreground: 224 71% 4%;
+    
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 213 31% 91%;
+    
+    --muted: 215 28% 17%;
+    --muted-foreground: 217 11% 65%;
+    
+    --accent: 138 100% 40%;  /* Changed to use DMM Green */
+    --accent-foreground: 224 71% 4%;
+    
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 213 31% 91%;
+    
+    --border: 215 28% 17%;
+    --input: 215 28% 17%;
+    --ring: 138 100% 40%;  /* Lighter green for dark mode */
+    
+    --sidebar-background: 224 71% 4%;
+    --sidebar-foreground: 213 31% 91%;
+    --sidebar-primary: 138 100% 40%;  /* Lighter green for dark mode */
+    --sidebar-primary-foreground: 224 71% 4%;
+    --sidebar-accent: 215 28% 17%;
+    --sidebar-accent-foreground: 213 31% 91%;
+    --sidebar-border: 215 28% 17%;
+    --sidebar-ring: 138 100% 40%;  /* Lighter green for dark mode */
+
+    /* Animation specific */
+    --skeleton: hsl(138, 100%, 40%);  /* Changed to DMM Green for dark mode */
+    --btn-border: hsl(138, 100%, 45%);  /* Changed to DMM Green variant for dark mode */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* DMM Specific Components */
+  .dmm-gradient {
+    background: linear-gradient(135deg, hsl(var(--dmm-primary)) 0%, hsl(var(--dmm-accent)) 100%);
+  }
+  
+  .dmm-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
+  }
+  
+  .dmm-btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-6 py-3 rounded-lg font-medium transition-colors duration-200 shadow-sm hover:shadow-md;
+  }
+  
+  .dmm-btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/80 px-6 py-3 rounded-lg font-medium transition-colors duration-200;
+  }
+  
+  .dmm-input {
+    @apply bg-background border border-input rounded-lg px-4 py-3 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all duration-200;
+  }
+
+  .g-button {
+    @apply rounded-[var(--radius)] border;
+    border-color: var(--btn-border)
+  }
+
+  /* Animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(var(--dmm-primary)), hsl(var(--dmm-accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rich Text Editor Styles */
+.rich-text-content {
+  @apply text-foreground;
+}
+
+.rich-text-content p {
+  @apply mb-2;
+}
+
+.rich-text-content strong {
+  @apply font-semibold;
+}
+
+.rich-text-content ul {
+  @apply list-disc list-inside mb-2 ml-4;
+}
+
+.rich-text-content ol {
+  @apply list-decimal list-inside mb-2 ml-4;
+}
+
+.rich-text-content ul li,
+.rich-text-content ol li {
+  @apply mb-1;
+}
+
+.rich-text-content ul ul,
+.rich-text-content ol ul,
+.rich-text-content ul ol,
+.rich-text-content ol ol {
+  @apply ml-4 mt-1;
+}
